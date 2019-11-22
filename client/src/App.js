@@ -16,6 +16,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Home from "./components/dashboard/Home";
 import Search from "./components/dashboard/Search";
 import Profile from "./components/dashboard/Profile";
+import Tweet from './components/dashboard/Tweet';
 
 import "./App.css";
 
@@ -53,6 +54,7 @@ class App extends Component {
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/search" component={Search} />
               <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/tweet" component={Tweet} />
             </Switch>
           </div>
         </Router>

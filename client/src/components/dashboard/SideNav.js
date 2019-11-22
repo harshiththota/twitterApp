@@ -17,11 +17,11 @@ class SideNav extends Component {
       <ul id="slide-out" className="sidenav">
         <li />
         <li>
-          <a href="home">
-            <i className="material-icons">twitter</i>
-            Home
-                        </a>
+          <a href="home">Home</a>
         </li>
+          <li>
+            <a href="tweet">Tweet</a>
+          </li>
         <li>
           <a href="search">Search</a>
         </li>
