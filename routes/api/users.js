@@ -8,9 +8,11 @@ const passport = require("passport");
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateTweetInput = require("../../validation/tweet");
 
-// Load User model
+// Load models
 const User = require("../../models/User");
+const Tweet = require("../../models/Tweet");
 
 // @route POST api/users/register
 // @desc Register user
@@ -110,5 +112,30 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+router.post('/tweet', passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    const { errors, isValid } = validateTweetInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const newTweet = new Tweet({
+      tweetContent: req.body.tweetContent,
+      hashTag: req.body.hashTag,
+      user: req.user
+    });
+
+    newTweet
+    .save()
+    .then(() => {
+      res.json({
+        success: true,
+      });
+    }).catch(err => console.log(err));
+  }
+);
 
 module.exports = router;
