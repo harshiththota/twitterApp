@@ -1,24 +1,20 @@
 import React, { Component } from "react";
 
 import SideNav from './SideNav';
+import TweetCard from './TweetCard';
 
 class Home extends Component {
   render() {
+    const content = [1,2,3,4,5,6].map((index) =>
+      <TweetCard />
+    );
     return (
-        <div>
-          <SideNav />
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
-          <div className="row">
-            <div className="landing-copy col s12 center-align">
-              <h4>
-                <p className="flow-text grey-text text-darken-1">
-                  In Home Screen
-              </p>
-              </h4>
-            </div>
-          </div>
-        </div>
-        </div>
+      <div>
+        <SideNav />
+        <div style={{"background-color": "lightblue" }}>
+          {content}
+        </div>  
+      </div>
     );
   }
 }
