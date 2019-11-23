@@ -2,7 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, TWEETS } from "./types";
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -72,6 +72,27 @@ export const tweet = tweetData => dispatch => {
     .post("/api/users/tweet", tweetData)
     .then(res => {
       console.log('res : ', res);
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const setTweets = tweetsData => {
+  return {
+    type: TWEETS,
+    payload: tweetsData
+  };
+};
+
+export const getTweets = () => dispatch => {
+  axios
+    .get("/api/users/tweets")
+    .then(res => {
+      dispatch(setTweets(res.data.tweets))
     })
     .catch(err =>
       dispatch({
