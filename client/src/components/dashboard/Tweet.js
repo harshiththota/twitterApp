@@ -97,5 +97,3 @@ export default connect(
   mapStateToProps,
   { tweet }
 )(Tweet);
-
-
