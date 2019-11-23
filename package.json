@@ -1,7 +1,7 @@
 {
-  "name": "mern-auth",
+  "name": "twitterApp",
   "version": "1.0.0",
-  "description": "Mern Auth Example",
+  "description": "Twitter App",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
