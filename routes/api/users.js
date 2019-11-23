@@ -138,4 +138,18 @@ router.post('/tweet', passport.authenticate('jwt', { session: false }),
   }
 );
 
+router.get('/tweets', passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    
+    Tweet.find({ user: req.user })
+      .then((tweets) => {
+        res.json({
+          success: true,
+          tweets,
+        });
+      });
+  }
+);
+
+
 module.exports = router;
