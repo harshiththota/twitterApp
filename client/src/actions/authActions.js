@@ -101,3 +101,18 @@ export const getTweets = () => dispatch => {
       })
     );
 };
+
+export const searchUser = twitterId => dispatch => {
+  console.log('In search  ; ', twitterId);
+  axios
+    .post("/api/users/search-user", twitterId)
+    .then(res => {
+      console.log('res : ', res);
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

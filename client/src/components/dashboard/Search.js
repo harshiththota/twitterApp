@@ -1,25 +1,71 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
+import { searchUser } from "../../actions/authActions";
 import SideNav from './SideNav';
 
 class Search extends Component {
+  constructor() {
+    super();
+    this.state = {
+      twitterId: "",
+      errors: {},
+    };
+  }
+  
+  onSubmit = e => {
+    e.preventDefault();
+
+    this.props.searchUser(this.state.twitterId);
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
   render() {
+    const { errors } = this.state;
+
     return (
       <div>
         <SideNav />
-        <div style={{ height: "75vh" }} className="container valign-wrapper">
-          <div className="row">
-            <div className="landing-copy col s12 center-align">
-              <h4>
-                <p className="flow-text grey-text text-darken-1">
-                  In Search Screen
-              </p>
-              </h4>
-            </div>
+        <form noValidate onSubmit={this.onSubmit}>
+          <div className="input-field col s12">
+            <input
+              onChange={this.onChange}
+              value={this.state.twitterId}
+              error={errors.twitterId}
+              id="twitterId"
+              type="text"
+              className={classnames("", {
+                invalid: errors.twitterId
+              })}
+            />
+            <label htmlFor="twitterId">Search Twitter Id</label>
+            <span className="red-text">
+              {errors.twitterId}
+            </span>
           </div>
-        </div>
+          <button className="btn waves-effect waves-light" type="submit" name="action">Search
+                <i className="material-icons right">search</i>
+          </button>
+        </form>
       </div>
     );
   }
 }
-export default Search;
+
+Search.propTypes = {
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { searchUser }
+)(Search);

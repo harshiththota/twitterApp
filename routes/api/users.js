@@ -9,6 +9,7 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 const validateTweetInput = require("../../validation/tweet");
+const validateSearchInput = require("../../validation/search");
 
 // Load models
 const User = require("../../models/User");
@@ -151,5 +152,24 @@ router.get('/tweets', passport.authenticate('jwt', { session: false }),
   }
 );
 
+
+router.post('/search-user', passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    console.log('req : ', req);
+    const { errors, isValid } = validateSearchInput(req.body);
+    console.log('&&& : ', errors, isValid);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    console.log('hre1');
+    user.find({ user: req.body.twitterId })
+      .then((user) => {
+        res.json({
+          success: true,
+          user,
+        });
+      });
+  }
+);
 
 module.exports = router;
