@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 
@@ -26,10 +27,10 @@ class SideNav extends Component {
       <ul id="slide-out" className="sidenav">
         <li />
         <li>
-          <a href="home">Home</a>
+          <Link to="/home" >Home</Link>
         </li>
           <li>
-            <a href="tweet">Tweet</a>
+            <Link to="/tweet">Tweet</Link>
           </li>
         <li>
           <div className="divider" />
@@ -49,9 +50,9 @@ class SideNav extends Component {
             </button>
         </li>
       </ul>
-      <a href="#!" data-target="slide-out" className="sidenav-trigger">
+      <Link to="#!" data-target="slide-out" className="sidenav-trigger">
         <i className="material-icons">menu</i>
-      </a>
+      </Link>
     </div >
     );
   }
